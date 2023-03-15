@@ -43,10 +43,12 @@ function add() {
     newTot = getCookie(today);
 
     if (kalories !== 0) {
-        list = getCookie(today + "_list");
-        list = list.split("#").push(kalories).join("#");
+        listString = getCookie(today + "_list");
+        list = listString.split("#");
+        list.push(kalories);
+        listString = list.join("#");
         console.log(list);
-        setCookie(today + "_list", list, 10);
+        setCookie(today + "_list", listString, 10);
         //list = list.split("#");
         //for (i = 0; i < list.length; i++) {
             //elem = list[i];
@@ -57,7 +59,7 @@ function add() {
                 button = document.createElement("button");
                 button.id = "button_" + i;
                 button.setAttribute("onclick", "remove(" + i + ")");
-                button.innerText = elem;
+                button.innerText = kalories;
                 button.style = "width:100%;height:30pt;font-size:20pt";
                 div.appendChild(button);
             //}
