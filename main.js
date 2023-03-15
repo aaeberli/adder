@@ -10,7 +10,7 @@ function init() {
     today = getToday();
     tot = getCookie(today);
     list = getCookie(today + "_list");
-    list = list.split(" ");
+    list = list.split("#");
     console.log(list);
     for (i = 0; i < list.length; i++) {
         elem = list[i];
@@ -44,10 +44,10 @@ function add() {
 
     if (kalories !== 0) {
         list = getCookie(today + "_list");
-        list = list + kalories + " ";
+        list = list + kalories + "#";
         console.log(list);
         setCookie(today + "_list", list, 10);
-        list = list.split(" ");
+        list = list.split("#");
         for (i = 0; i < list.length; i++) {
             elem = list[i];
             div = document.getElementById("list");
@@ -72,11 +72,11 @@ function add() {
 function remove(pos) {
     today = getToday();
     list = getCookie(today + "_list");
-    list = list.split(" ");
+    list = list.split("#");
     newList = "";
     for (i = 0; i < list.length; i++) {
         if (i !== pos) {
-            newList = newList + list[i] + " ";
+            newList = newList + list[i] + "#";
         }
     }
     tot = parseInt(getCookie(today));
