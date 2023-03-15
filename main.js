@@ -44,22 +44,24 @@ function add() {
 
     if (kalories !== 0) {
         list = getCookie(today + "_list");
-        list = list + "#" + kalories;
+        list = list.split("#").push(kalories).join("#");
         console.log(list);
         setCookie(today + "_list", list, 10);
-        list = list.split("#");
-        for (i = 0; i < list.length; i++) {
-            elem = list[i];
+        //list = list.split("#");
+        //for (i = 0; i < list.length; i++) {
+            //elem = list[i];
             div = document.getElementById("list");
-            if (elem !== "") {
+            buttons = document.getElementsByTagName("button")
+            i = buttons.length;
+            //if (elem !== "") {
                 button = document.createElement("button");
                 button.id = "button_" + i;
                 button.setAttribute("onclick", "remove(" + i + ")");
                 button.innerText = elem;
                 button.style = "width:100%;height:30pt;font-size:20pt";
                 div.appendChild(button);
-            }
-        }
+            //}
+        //}
     }
     showTot.innerText = newTot;
 
