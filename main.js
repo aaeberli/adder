@@ -44,7 +44,7 @@ function add() {
 
     if (kalories !== 0) {
         list = getCookie(today + "_list");
-        list = list + kalories + "#";
+        list = list + "#" + kalories;
         console.log(list);
         setCookie(today + "_list", list, 10);
         list = list.split("#");
