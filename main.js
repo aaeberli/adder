@@ -44,26 +44,23 @@ function add() {
 
     if (kalories !== 0) {
         listString = getCookie(today + "_list");
-        list = listString.split("#");
+        if(listString == "")
+            list = new Array();
+        else
+            list = listString.split("#");
         list.push(kalories);
         listString = list.join("#");
         console.log(list);
         setCookie(today + "_list", listString, 10);
-        //list = list.split("#");
-        //for (i = 0; i < list.length; i++) {
-            //elem = list[i];
-            div = document.getElementById("list");
-            buttons = document.getElementsByTagName("button")
-            i = buttons.length;
-            //if (elem !== "") {
-                button = document.createElement("button");
-                button.id = "button_" + i;
-                button.setAttribute("onclick", "remove(" + i + ")");
-                button.innerText = kalories;
-                button.style = "width:100%;height:30pt;font-size:20pt";
-                div.appendChild(button);
-            //}
-        //}
+        div = document.getElementById("list");
+        buttons = document.getElementsByTagName("button")
+        i = buttons.length;
+        button = document.createElement("button");
+        button.id = "button_" + i;
+        button.setAttribute("onclick", "remove(" + i + ")");
+        button.innerText = kalories;
+        button.style = "width:100%;height:30pt;font-size:20pt";
+        div.appendChild(button);
     }
     showTot.innerText = newTot;
 
