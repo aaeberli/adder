@@ -78,7 +78,7 @@ function remove(pos) {
     list = list.filter(l => {
       if (i++ != pos) return l;
     });
-    tot = list.reduce((acc, value) => accumulator + parseInt(value), 0);
+    tot = list.reduce((acc, value) => acc + parseInt(value), 0);
     listString = list.join("#");
     setCookie(today + "_list", listString, 10);
     setCookie(today, tot, 10);
@@ -88,7 +88,7 @@ function remove(pos) {
     while (div.childNodes.length > 0) {
         div.removeChild(div.childNodes[0]);
     }
-alert();
+
     for (i = 0; i < list.length; i++) {
         elem = list[i];
         if (elem !== "") {
