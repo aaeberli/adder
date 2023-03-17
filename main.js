@@ -56,6 +56,7 @@ function init() {
     //}
     //showTot.innerText = tot;
     showToday.innerText = today;
+    ko.applyBindings(viewModel);
 }
 
 function add() {
