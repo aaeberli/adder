@@ -71,6 +71,10 @@ function add() {
 }
 
 function remove(pos) {
+    if (!confirm("Remove this entry?")) {
+        return;
+    }
+    
     today = getToday();
     listString = getCookie(today + "_list");
     list = listString.split("#");
