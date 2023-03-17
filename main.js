@@ -55,7 +55,7 @@ function init() {
     //    setCookie(today, 0, 10);
     //}
     //showTot.innerText = tot;
-    viewModel.total = newTot;
+    viewModel.total = tot;
     showToday.innerText = today;
 }
 
