@@ -2,13 +2,39 @@
 _local = false;
 _localCookie = "";
 
-
-function init() {
-    showTot = document.getElementById("showTot");
-    showToday = document.getElementById("showToday");
+function ViewModel() {
+    var self = this;
 
     today = getToday();
-    tot = getCookie(today);
+    total = getCookie(today);
+    if (total === "") {
+        total = 0;
+        setCookie(today, 0, 10);
+    }
+    self.total = total;
+    /*self.populateSheet = execute;
+    self.years = getLastTwoYears();
+    self.jwtToken = getToken();
+    self.processStatus = ko.observable("");
+    self.emailMessageList = null;
+    self.sheets = new Object();
+    self.failures = ko.observableArray();
+    self.processedMessages = ko.observable(0);
+    self.newFailuresCount = ko.observable(0);
+
+    self.addFailure = function (failure) {
+        self.failures.push(failure);
+    }*/
+}
+
+function init() {
+    viewModel = new ViewModel();
+
+    //showTot = document.getElementById("showTot");
+    showToday = document.getElementById("showToday");
+
+    //today = getToday();
+    //tot = getCookie(today);
     list = getCookie(today + "_list");
     list = list.split("#");
     console.log(list);
@@ -24,11 +50,12 @@ function init() {
             div.appendChild(button);
         }
     }
-    if (tot === "") {
-        tot = 0;
-        setCookie(today, 0, 10);
-    }
-    showTot.innerText = tot;
+    //if (tot === "") {
+    //    tot = 0;
+    //    setCookie(today, 0, 10);
+    //}
+    //showTot.innerText = tot;
+    viewModel.total = newTot;
     showToday.innerText = today;
 }
 
@@ -44,7 +71,7 @@ function add() {
 
     if (kalories !== 0) {
         listString = getCookie(today + "_list");
-        if(listString == "")
+        if (listString == "")
             list = new Array();
         else
             list = listString.split("#");
@@ -62,8 +89,8 @@ function add() {
         button.style = "width:100%;height:30pt;font-size:20pt";
         div.appendChild(button);
     }
-    showTot.innerText = newTot;
-
+    //showTot.innerText = newTot;
+    viewModel.total = newTot;
     showToday.innerText = today;
 
     document.getElementById("kalories").value = "";
@@ -74,13 +101,13 @@ function remove(pos) {
     if (!confirm("Remove this entry?")) {
         return;
     }
-    
+
     today = getToday();
     listString = getCookie(today + "_list");
     list = listString.split("#");
     i = 0;
     list = list.filter(l => {
-      if (i++ != pos) return l;
+        if (i++ != pos) return l;
     });
     tot = list.reduce((acc, value) => acc + parseInt(value), 0);
     listString = list.join("#");
@@ -106,7 +133,8 @@ function remove(pos) {
     }
 
     newTot = getCookie(today);
-    showTot.innerText = newTot;
+    //showTot.innerText = newTot;
+    viewModel.total = newTot;
 
 }
 
