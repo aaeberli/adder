@@ -11,7 +11,7 @@ function ViewModel() {
         total = 0;
         setCookie(today, 0, 10);
     }
-    self.total = total;
+    self.total = ko.observable(total);
     /*self.populateSheet = execute;
     self.years = getLastTwoYears();
     self.jwtToken = getToken();
@@ -89,7 +89,7 @@ function add() {
         div.appendChild(button);
     }
     //showTot.innerText = newTot;
-    viewModel.total = newTot;
+    viewModel.total(newTot);
     showToday.innerText = today;
 
     document.getElementById("kalories").value = "";
@@ -133,7 +133,7 @@ function remove(pos) {
 
     newTot = getCookie(today);
     //showTot.innerText = newTot;
-    viewModel.total = newTot;
+    viewModel.total(newTot);
 
 }
 
