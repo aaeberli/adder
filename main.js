@@ -72,17 +72,15 @@ function add() {
 
 function remove(pos) {
     today = getToday();
-    list = getCookie(today + "_list");
-    list = list.split("#");
-    newList = "";
-    for (i = 0; i < list.length; i++) {
-        if (i !== pos) {
-            newList = newList + list[i] + "#";
-        }
-    }
-    tot = parseInt(getCookie(today));
-    tot = tot - list[pos];
-    setCookie(today + "_list", newList, 10);
+    listString = getCookie(today + "_list");
+    list = listString.split("#");
+    i = 0;
+    list = list.filter(l => {
+      if (i++ != pos) return l;
+    });
+    tot = list.reduce((acc, value) => accumulator + parseInt(value), 0);
+    listString = list.join("#");
+    setCookie(today + "_list", listString, 10);
     setCookie(today, tot, 10);
 
     div = document.getElementById("list");
@@ -90,10 +88,9 @@ function remove(pos) {
     while (div.childNodes.length > 0) {
         div.removeChild(div.childNodes[0]);
     }
-
-    for (i = 0; i < newList.length; i++) {
-        elem = newList[i];
-        div = document.getElementById("list");
+alert();
+    for (i = 0; i < list.length; i++) {
+        elem = list[i];
         if (elem !== "") {
             button = document.createElement("button");
             button.id = "button_" + i;
