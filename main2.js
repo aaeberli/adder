@@ -75,7 +75,7 @@ function clear(){
 }
 
 function add() {
-    kalories = viewModel.calcResult();
+    kalories = parseInt(viewModel.calcResult());
     
     if (isNaN(kalories)) kalories = 0;
     today = getToday();
