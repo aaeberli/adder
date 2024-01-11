@@ -10,114 +10,121 @@
     <title>Adder</title>
 </head>
 <body>
-  <h2>Non-Responsive JavaScript Calculator</h2>
-  <input type="text" data-bind="text: kalories" disabled>
-  <br>
-  <button onclick="append('7')">7</button>
-  <button onclick="append('8')">8</button>
-  <button onclick="append('9')">9</button>
-  <button onclick="append('/')">/</button>
-  <br>
-  <button onclick="append('4')">4</button>
-  <button onclick="append('5')">5</button>
-  <button onclick="append('6')">6</button>
-  <button onclick="append('*')">*</button>
-  <br>
-  <button onclick="append('1')">1</button>
-  <button onclick="append('2')">2</button>
-  <button onclick="append('3')">3</button>
-  <button onclick="append('-')">-</button>
-  <br>
-  <button onclick="append('0')">0</button>
-  <button onclick="append('.')">.</button>
-  <button onclick="clearDisplay()">C</button>
-  <button onclick="append('+')">+</button>
-  <br>
-  <button onclick="add()">ADD</button>
+    <h2>Non-Responsive JavaScript Calculator</h2>
+    <input type="text" data-bind="text: kalories" disabled>
+    <br>
+    <button onclick="append('7')">7</button>
+    <button onclick="append('8')">8</button>
+    <button onclick="append('9')">9</button>
+    <button onclick="append('/')">/</button>
+    <br>
+    <button onclick="append('4')">4</button>
+    <button onclick="append('5')">5</button>
+    <button onclick="append('6')">6</button>
+    <button onclick="append('*')">*</button>
+    <br>
+    <button onclick="append('1')">1</button>
+    <button onclick="append('2')">2</button>
+    <button onclick="append('3')">3</button>
+    <button onclick="append('-')">-</button>
+    <br>
+    <button onclick="append('0')">0</button>
+    <button onclick="append('.')">.</button>
+    <button onclick="clearDisplay()">C</button>
+    <button onclick="append('+')">+</button>
+    <br>
+    <button onclick="add()">ADD</button>
 
-  <script>
+    <br />
+    <div style="text-align:center">
+        <label id="showTot" data-bind="text: total" style="width:100%;height:80pt;font-size:70pt;font-family:Arial"></label>
+        <br />
+        <label id="showToday" style="width:100%;height:80pt;font-size:20pt;font-family:Arial"></label>
+    </div>
+    <div id="list" style="margin-top:30pt"></div>
+    <script type="text/javascript">init()</script>
+    <script>
     let displayValue = '';
 
-    function appendToDisplay(value) {
-      displayValue += value;
-      updateDisplay();
-    }
-
-    function clearDisplay() {
-      displayValue = '';
-      updateDisplay();
-    }
-
-    function updateDisplay() {
-      document.getElementById('display').value = displayValue;
-    }
-
-    function calculateResult() {
-      try {
-        const result = evaluateExpression(displayValue);
-        displayValue = result.toString();
-        updateDisplay();
-      } catch (error) {
-        displayValue = 'Error';
-        updateDisplay();
-      }
-    }
-
-    function evaluateExpression(expression) {
-      const outputQueue = [];
-      const operatorStack = [];
-      const precedence = { '+': 1, '-': 1, '*': 2, '/': 2 };
-
-      const isOperator = (token) => precedence.hasOwnProperty(token);
-
-      const shuntOperators = (operator) => {
-        while (
-          operatorStack.length > 0 &&
-          isOperator(operatorStack[operatorStack.length - 1]) &&
-          precedence[operator] <= precedence[operatorStack[operatorStack.length - 1]]
-        ) {
-          outputQueue.push(operatorStack.pop());
+        function appendToDisplay(value) {
+            displayValue += value;
+            updateDisplay();
         }
-        operatorStack.push(operator);
-      };
 
-      expression.split(/(\d*\.\d+|\d+|[\+\-\*\/\(\)])\s*/).forEach((token) => {
-        if (!isNaN(parseFloat(token))) {
-          outputQueue.push(parseFloat(token));
-        } else if (isOperator(token)) {
-          shuntOperators(token);
+        function clearDisplay() {
+            displayValue = '';
+            updateDisplay();
         }
-      });
 
-      while (operatorStack.length > 0) {
-        outputQueue.push(operatorStack.pop());
-      }
-
-      return evaluateRPN(outputQueue);
-    }
-
-    function evaluateRPN(rpn) {
-      const stack = [];
-
-      rpn.forEach((token) => {
-        if (typeof token === 'number') {
-          stack.push(token);
-        } else if (token in operators) {
-          const operand2 = stack.pop();
-          const operand1 = stack.pop();
-          stack.push(operators[token](operand1, operand2));
+        function updateDisplay() {
+            document.getElementById('display').value = displayValue;
         }
-      });
 
-      return stack.pop();
-    }
+        function calculateResult() {
+            try {
+                const result = evaluateExpression(displayValue);
+                displayValue = result.toString();
+                updateDisplay();
+            } catch (error) {
+                displayValue = 'Error';
+                updateDisplay();
+            }
+        }
 
-    const operators = {
-      '+': (a, b) => a + b,
-      '-': (a, b) => a - b,
-      '*': (a, b) => a * b,
-      '/': (a, b) => a / b,
-    };
-  </script>
+        function evaluateExpression(expression) {
+            const outputQueue = [];
+            const operatorStack = [];
+            const precedence = { '+': 1, '-': 1, '*': 2, '/': 2 };
+
+            const isOperator = (token) => precedence.hasOwnProperty(token);
+
+            const shuntOperators = (operator) => {
+                while (
+                    operatorStack.length > 0 &&
+                    isOperator(operatorStack[operatorStack.length - 1]) &&
+                    precedence[operator] <= precedence[operatorStack[operatorStack.length - 1]]
+                ) {
+                    outputQueue.push(operatorStack.pop());
+                }
+                operatorStack.push(operator);
+            };
+
+            expression.split(/(\d*\.\d+|\d+|[\+\-\*\/\(\)])\s*/).forEach((token) => {
+                if (!isNaN(parseFloat(token))) {
+                    outputQueue.push(parseFloat(token));
+                } else if (isOperator(token)) {
+                    shuntOperators(token);
+                }
+            });
+
+            while (operatorStack.length > 0) {
+                outputQueue.push(operatorStack.pop());
+            }
+
+            return evaluateRPN(outputQueue);
+        }
+
+        function evaluateRPN(rpn) {
+            const stack = [];
+
+            rpn.forEach((token) => {
+                if (typeof token === 'number') {
+                    stack.push(token);
+                } else if (token in operators) {
+                    const operand2 = stack.pop();
+                    const operand1 = stack.pop();
+                    stack.push(operators[token](operand1, operand2));
+                }
+            });
+
+            return stack.pop();
+        }
+
+        const operators = {
+            '+': (a, b) => a + b,
+            '-': (a, b) => a - b,
+            '*': (a, b) => a * b,
+            '/': (a, b) => a / b,
+        };</script>
 </body>
 </html>
