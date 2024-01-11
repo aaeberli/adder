@@ -3,7 +3,7 @@ function calculateResult() {
         const result = evaluateExpression(displayValue);
         return result.toString();
     } catch (error) {
-        return = "";
+        return "";
     }
 }
 
