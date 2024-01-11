@@ -1,10 +1,9 @@
 function calculateResult() {
     try {
         const result = evaluateExpression(displayValue);
-        displayValue = result.toString();
-        updateDisplay();
+        return = result.toString();
     } catch (error) {
-        displayValue = 'Error';
+        return = "";
     }
 }
 
