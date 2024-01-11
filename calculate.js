@@ -1,6 +1,6 @@
-function calculateResult() {
+function calculateResult(expression) {
     try {
-        const result = evaluateExpression(displayValue);
+        const result = evaluateExpression(expression);
         return result.toString();
     } catch (error) {
         return "";
