@@ -12,7 +12,7 @@ function ViewModel() {
         setCookie(today, 0, 10);
     }
     self.total = ko.observable(total);
-    self.kalories  ko.observable("");
+    self.kalories = ko.observable("");
     /*self.populateSheet = execute;
     self.years = getLastTwoYears();
     self.jwtToken = getToken();
