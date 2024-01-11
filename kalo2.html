@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Safe JavaScript Calculator</title>
+  <title>Non-Responsive JavaScript Calculator</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,8 +12,7 @@
     }
 
     input {
-      width: 80%;
-      max-width: 300px;
+      width: 300px;
       height: 40px;
       font-size: 20px;
       text-align: right;
@@ -21,23 +20,15 @@
     }
 
     button {
-      width: 25%;
-      max-width: 80px;
+      width: 75px;
       height: 60px;
       font-size: 18px;
       margin: 5px;
     }
-
-    @media (max-width: 600px) {
-      input, button {
-        width: 100%;
-        max-width: none;
-      }
-    }
   </style>
 </head>
 <body>
-  <h2>Safe JavaScript Calculator</h2>
+  <h2>Non-Responsive JavaScript Calculator</h2>
   <input type="text" id="display" disabled>
   <br>
   <button onclick="appendToDisplay('7')">7</button>
