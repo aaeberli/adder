@@ -13,6 +13,7 @@ function ViewModel() {
     }
     self.total = ko.observable(total);
     self.kalories = ko.observable("");
+    self.calcResult = ko.observable("");
     /*self.populateSheet = execute;
     self.years = getLastTwoYears();
     self.jwtToken = getToken();
@@ -62,10 +63,11 @@ function init() {
 
 function append(digit) {
     viewModel.kalories(viewModel.kalories().concat(digit));
+    viewModel.calcResult(viewModel.kalories());
 }
 
 function add() {
-    viewModel.kalories = viewModel.kalories();
+    kalories = viewModel.calcResult();
     
     if (isNaN(kalories)) kalories = 0;
     today = getToday();
