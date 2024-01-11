@@ -63,11 +63,15 @@ function init() {
 
 function append(digit) {
     viewModel.kalories(viewModel.kalories().concat(digit));
-    viewModel.calcResult(calculateResult(viewModel.kalories()));
+    result = calculateResult(viewModel.kalories());
+    if (result != "" && result != NaN) {
+        viewModel.calcResult();
+    }
 }
 
 function clear(){
     viewModel.kalories("");
+    viewModel.calcResult("");
 }
 
 function add() {
