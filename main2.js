@@ -109,7 +109,7 @@ function add() {
     viewModel.total(newTot);
     showToday.innerText = today;
 
-    viewModel.kalories = "";
+    clear();
 }
 
 function remove(pos) {
