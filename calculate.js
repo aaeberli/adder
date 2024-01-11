@@ -1,7 +1,7 @@
 function calculateResult() {
     try {
         const result = evaluateExpression(displayValue);
-        return = result.toString();
+        return result.toString();
     } catch (error) {
         return = "";
     }
