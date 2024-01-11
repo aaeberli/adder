@@ -63,7 +63,7 @@ function init() {
 
 function append(digit) {
     viewModel.kalories(viewModel.kalories().concat(digit));
-    viewModel.calcResult(viewModel.kalories());
+    viewModel.calcResult(calculateResult(viewModel.kalories()));
 }
 
 function add() {
