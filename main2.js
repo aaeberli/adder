@@ -65,7 +65,7 @@ function append(digit) {
     viewModel.kalories(viewModel.kalories().concat(digit));
     result = calculateResult(viewModel.kalories());
     if (result != "" && result != NaN) {
-        viewModel.calcResult();
+        viewModel.calcResult(result);
     }
 }
 
