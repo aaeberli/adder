@@ -66,6 +66,10 @@ function append(digit) {
     viewModel.calcResult(calculateResult(viewModel.kalories()));
 }
 
+function clear(){
+    viewModel.kalories = ko.observable("");
+}
+
 function add() {
     kalories = viewModel.calcResult();
     
